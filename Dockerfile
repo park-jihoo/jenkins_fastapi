@@ -6,6 +6,6 @@ COPY . /app
 
 RUN conda env create -f environment.yml
 
-EXPOSE 5000
+EXPOSE 3000
 
 CMD ["conda", "run", "-n", "flask", "python", "app.py"]
