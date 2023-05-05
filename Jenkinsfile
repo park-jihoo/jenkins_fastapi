@@ -1,22 +1,34 @@
-pipeline {
-    agent any
+pipeline{
+    agent {
+        docker {
+            image 'continuumio/miniconda3:latest'
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
+        }
+    }
     stages {
-        stage('Checkout') {
+        stage('Build') {
             steps {
-                echo 'Checking out code..'
-                checkout scm
+                sh 'python --version'
             }
         }
-        stage('Docker Build') {
+        stage('Docker Clean') {
             steps {
-                echo 'Building Docker Image..'
-                sh 'docker build -t flask-app:latest .'
+                sh 'docker container stop $(docker container ls -aq)'
             }
         }
-        stage('Docker Run') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Running Docker Image..'
-                sh 'docker run -d -p 3000:3000 flask-app'
+                sh 'docker build -t myimage .'
+            }
+        }
+        stage('Run Docker Image') {
+            steps {
+                sh 'docker run -d -p 3000:3000 myimage'
+            }
+        }
+        stage('Hello World!'){
+            steps {
+                echo 'Hello World!'
             }
         }
     }
