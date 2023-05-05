@@ -1,11 +1,6 @@
 pipeline{
     agent any
     stages {
-        stage('Build') {
-            steps {
-                sh 'python --version'
-            }
-        }
         stage('Docker Clean') {
             steps {
                 sh 'docker container stop $(docker container ls -aq)'
