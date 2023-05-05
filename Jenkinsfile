@@ -1,24 +1,34 @@
 pipeline {
     agent any
     stages {
+        stage('Setup') {
+            steps {
+                echo 'Setting up..'
+                sh 'python -m pip install --upgrade pip'
+            }
+        }
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'conda env create -f environment.yml'
+                sh 'pip install -r requirements.txt'
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
-                sh 'conda run -n myenv python -m unittest discover -s'
+                sh 'python -m unittest'
             }
         }
-        stage('Deploy') {
+        stage('Docker Build') {
             steps {
-                echo 'Deploying....'
-                sh 'docker build -t myimage:latest .'
-                sh 'docker run -d -p 5000:5000 myimage:latest'
-
+                echo 'Building Docker Image..'
+                sh 'docker build -t flask-app:latest .'
+            }
+        }
+        stage('Docker Run') {
+            steps {
+                echo 'Running Docker Image..'
+                sh 'docker run -d -p 3000:3000 flask-app'
             }
         }
     }

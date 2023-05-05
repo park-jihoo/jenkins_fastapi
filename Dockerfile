@@ -4,8 +4,9 @@ WORKDIR /app
 
 COPY . /app
 
-RUN conda env create -f environment.yml
+RUN python -m pip install --upgrade pip
+RUN pip install -r requirements.txt
 
 EXPOSE 3000
 
-CMD ["conda", "run", "-n", "flask", "python", "app.py"]
+CMD ["python", "app.py"]
