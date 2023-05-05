@@ -1,22 +1,10 @@
 pipeline {
     agent any
     stages {
-        stage('Setup') {
+        stage('Checkout') {
             steps {
-                echo 'Setting up..'
-                sh 'python -m pip install --upgrade pip'
-            }
-        }
-        stage('Build') {
-            steps {
-                echo 'Building..'
-                sh 'pip install -r requirements.txt'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-                sh 'python -m unittest'
+                echo 'Checking out code..'
+                checkout scm
             }
         }
         stage('Docker Build') {
