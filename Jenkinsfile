@@ -6,11 +6,6 @@ pipeline{
                 echo 'Hello World'
             }
         }
-        stage('Git Checkout'){
-            steps{
-                sh 'git pull'
-            }
-        }
         stage('Clean'){
             steps{
                 sh 'rm -rf .pytest_cache'
