@@ -21,8 +21,8 @@ pipeline{
         stage('Deploy'){
             steps{
                 echo 'Deploying'
-                sh 'sudo kill -9 $(sudo lsof -t -i:3000)'
-                sh 'sudo nohup python3 app.py > log.txt 2>&1 &'
+                sh 'kill -9 $(sudo lsof -t -i:3000)'
+                sh 'nohup python3 app.py > log.txt 2>&1 &'
             }
         }
     }
