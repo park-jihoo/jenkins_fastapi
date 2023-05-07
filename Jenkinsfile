@@ -1,25 +1,25 @@
 pipeline{
     agent any
     stages {
-        stage('Docker Clean') {
-            steps {
-                sh 'docker container stop $(docker container ls -aq)'
-            }
+        stage('Git Checkout'){
+            sh 'git pull'
         }
-        stage('Build Docker Image') {
-            steps {
-                sh 'docker build -t myimage .'
-            }
+        stage('Clean'){
+            sh 'rm -rf __pycache__'
         }
-        stage('Run Docker Image') {
-            steps {
-                sh 'docker run -d -p 3000:3000 myimage'
-            }
+        stage('Install Python'){
+            sh 'apt-get update'
+            sh 'apt-get install python3'
+            sh 'apt-get install python3-pip'
         }
-        stage('Hello World!'){
-            steps {
-                echo 'Hello World!'
-            }
+        stage('Install Requirements'){
+            sh 'pip3 install -r requirements.txt'
+        }
+        stage('Run Tests'){
+            sh 'python3 -m pytest'
+        }
+        stage('Build'){
+            sh 'python3 app.py'
         }
     }
 }
