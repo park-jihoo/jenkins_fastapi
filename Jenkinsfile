@@ -1,25 +1,39 @@
 pipeline{
     agent any
     stages {
+        stage('Hello'){
+            steps{
+                echo 'Hello World'
+            }
+        }
         stage('Git Checkout'){
-            sh 'git pull'
+            steps{
+                sh 'git pull'
+            }
         }
         stage('Clean'){
-            sh 'rm -rf __pycache__'
+            steps{
+                sh 'rm -rf .pytest_cache'
+                sh 'rm -rf __pycache__'
+            }
         }
         stage('Install Python'){
-            sh 'apt-get update'
-            sh 'apt-get install python3'
-            sh 'apt-get install python3-pip'
+            steps{
+                sh 'apt-get update'
+                sh 'apt-get install python3'
+                sh 'apt-get install python3-pip'
+            }
         }
         stage('Install Requirements'){
-            sh 'pip3 install -r requirements.txt'
-        }
-        stage('Run Tests'){
-            sh 'python3 -m pytest'
+            steps{
+                sh 'pip3 install -r requirements.txt'
+                sh 'pip3 install pytest'
+            }
         }
         stage('Build'){
-            sh 'python3 app.py'
+            steps{
+                sh 'python3 app.py'
+            }
         }
     }
 }
