@@ -12,13 +12,6 @@ pipeline{
                 sh 'rm -rf __pycache__'
             }
         }
-        stage('Install Python'){
-            steps{
-                sh 'apt-get update'
-                sh 'apt-get install python3'
-                sh 'apt-get install python3-pip'
-            }
-        }
         stage('Install Requirements'){
             steps{
                 sh 'pip3 install -r requirements.txt'
