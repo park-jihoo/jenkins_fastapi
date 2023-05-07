@@ -1,10 +1,8 @@
-import unittest
+from fastapi import FastAPI
 
+def test_happy_path_name_returns_hello_name(self):
+    app = FastAPI()
+    response = app.get("/John")
+    assert response.status_code == 200
+    assert response.json() == {"Hello": "John"}
 
-class MyTestCase(unittest.TestCase):
-    def test_something(self):
-        self.assertEqual(True, True)  # add assertion here
-
-
-if __name__ == '__main__':
-    unittest.main()

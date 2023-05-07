@@ -1,12 +1,16 @@
-FROM continuumio/miniconda3:latest
+FROM python:3.9-alpine
 
-WORKDIR /app
+WORKDIR .
 
-COPY . /app
+# Path: /app/requirements.txt
+COPY requirements.txt .
 
-RUN python -m pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-EXPOSE 3000
+# Path: /app
+COPY . .
+
+# fastAPI
+EXPOSE 8000
 
 CMD ["python", "app.py"]
