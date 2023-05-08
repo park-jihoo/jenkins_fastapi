@@ -6,11 +6,3 @@ services:
       - "8000:8000"
     volumes:
         - .:/code
-  jenkins:
-    image: jenkins/jenkins:lts
-    ports:
-      - "8080:8080"
-    volumes:
-      - ./jenkins_home:/var/jenkins_home
-    depends_on:
-      - web
