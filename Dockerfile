@@ -1,16 +1,13 @@
-FROM python:3.9-alpine
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9
 
-WORKDIR .
+WORKDIR /app
 
-# Path: /app/requirements.txt
 COPY requirements.txt .
 
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Path: /app
 COPY . .
 
-# fastAPI
-EXPOSE 8000
+EXPOSE 80
 
-CMD ["python", "app.py"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
