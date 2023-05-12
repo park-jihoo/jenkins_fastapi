@@ -1,0 +1,12 @@
+[Unit]
+Description=FastAPI Server
+After=network.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/jenkins_flask
+ExecStart=/usr/bin/python3 /home/ubuntu/jenkins_flask/app.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

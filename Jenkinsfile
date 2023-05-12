@@ -13,7 +13,10 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'nohup python3 app.py --host 0.0.0.0 --port 80 & '
+                sh 'sudo cp /var/lib/jenkins/workspace/jenkins_flask /home/ubuntu'
+                sh 'sudo systemctl daemon-reload'
+                sh 'sudo systemctl start fastapi'
+                sh 'sudo systemctl enable fastapi'
             }
         }
     }
