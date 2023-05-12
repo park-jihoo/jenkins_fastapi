@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'sudo cp /var/lib/jenkins/workspace/jenkins_flask /home/ubuntu'
+                sh 'sudo cp /var/lib/jenkins/workspace/Jenkins/pipeline /home/ubuntu'
                 sh 'sudo systemctl daemon-reload'
                 sh 'sudo systemctl start fastapi'
                 sh 'sudo systemctl enable fastapi'
