@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git 'https://github.com/park-jihoo/jenkins_flask.git'
+                git 'https://github.com/park-jihoo/jenkins_fastapi.git'
             }
         }
         stage('Build') {
