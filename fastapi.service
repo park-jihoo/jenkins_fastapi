@@ -4,8 +4,8 @@ After=network.target
 
 [Service]
 User=root
-WorkingDirectory=/home/ubuntu/jenkins_fastapi
-ExecStart=/usr/bin/python3 /home/ubuntu/Jenkins_pipeline/app.py
+WorkingDirectory=/home/ec2-user/jenkins_fastapi
+ExecStart=/usr/bin/python3 /home/ec2-user/Jenkins_pipeline/app.py
 Restart=always
 
 [Install]
